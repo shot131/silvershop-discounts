@@ -5,6 +5,10 @@
  */
 class OrderCoupon extends Discount {
 
+	private static $db = array(
+		"Code" => "Varchar(25)"
+	);
+
 	private static $has_one = array(
 		//used to link to gift voucher purchase
 		"GiftVoucher" => "GiftVoucher_OrderItem"

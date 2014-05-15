@@ -12,11 +12,12 @@ Discount:
     - ZonesDiscountConstraint
     - CategoriesDiscountConstraint
     - ProductsDiscountConstraint
+    - CodeDiscountConstraint
     - GroupDiscountConstraint
     - DatetimeDiscountConstraint
     - ValueDiscountConstraint
     - UseLimitDiscountConstraint
-    - CodeDiscountConstraint
+
 CheckoutPage_Controller:
   extensions:
     - CouponFormCheckoutDecorator
