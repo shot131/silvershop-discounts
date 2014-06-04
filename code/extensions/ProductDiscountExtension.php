@@ -24,4 +24,24 @@ class ProductDiscountExtension extends DataExtension{
 		return (bool)$this->getTotalReduction();
 	}
 
+	/**
+	 * Get the historical changes in price.
+	 */
+	function getPriceHistory($pricefield = 'BasePrice') {
+		$versions = Versioned::get_all_versions(
+			get_class($this->owner), 
+			$this->owner->ID
+		);
+		$output = new ArrayList();
+		$price = 0;
+		foreach($versions as $version){
+			//if($version->{$pricefield} != $price){
+				$output->push($version);
+				$price = $version->{$pricefield};
+			//}
+		}
+
+		return $output;
+	}
+
 }

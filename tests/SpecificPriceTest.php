@@ -26,4 +26,28 @@ class SpecificPriceTest extends SapphireTest{
 		$this->assertEquals(10, $variation->getTotalReduction());
 	}
 
+	function testPriceHistory() {
+		$product = new Product();
+		$product->update(array(
+			'Title' => 'Test Product',
+			'BasePrice' => 200
+		));
+		$product->write();
+
+		//update other fields
+
+		$prices = array(200, 320, 320, 150, 50.50);
+		foreach($prices as $price){
+			$product->BasePrice = $price;
+			$product->write();
+		}
+
+		$this->assertDOSEquals(array(
+			array("BasePrice" => 200),
+			array("BasePrice" => 320),
+			array("BasePrice" => 150),
+			array("BasePrice" => 50.50),
+		), $product->getPriceHistory());
+	}
+
 }
