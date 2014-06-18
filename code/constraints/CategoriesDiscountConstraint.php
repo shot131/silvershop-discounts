@@ -50,8 +50,8 @@ class CategoriesDiscountConstraint extends DiscountConstraint{
 	 * This function is used by ItemDiscountAction, and the check function above.
 	 */
 	public function itemMatchesCategoryCriteria(OrderItem $item, Discount $discount) {
-		$discountcategories = $discount->Categories()->getIDList();
-		if(empty($discountcategories)){
+		$discountcategoryids = $discount->Categories()->getIDList();
+		if(empty($discountcategoryids)){
 
 			return true;
 		}
@@ -63,7 +63,7 @@ class CategoriesDiscountConstraint extends DiscountConstraint{
 		}
 		$ids = array_intersect(
 			$buyable->getCategoryIDs(),
-			$this->itemCateogryIDs($item)
+			$discountcategoryids
 		);
 
 		return !empty($ids);
