@@ -17,15 +17,15 @@ class GiftVoucherProduct extends Product{
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		$fields->addFieldToTab("Root.Pricing",
-			new OptionsetField("VariableAmount", "Price", array(
-				0 => "Fixed",
-				1 => "Allow customer to choose"
+			new OptionsetField("VariableAmount", _t('GiftVoucherProduct.Price', 'Price'), array(
+				0 => _t('GiftVoucherProduct.Fixed', 'Fixed'),
+				1 => _t('GiftVoucherProduct.AllowCustomerToChoose', 'Allow customer to choose')
 			)),
 			"BasePrice"
 		);
 		$fields->addFieldsToTab("Root.Pricing", array(
 			//text field, because of CMS js validation issue
-			$minimumamount = new TextField("MinimumAmount", "Minimum Amount")
+			$minimumamount = new TextField("MinimumAmount", _t('GiftVoucherProduct.MinimumAmount', 'Minimum Amount'))
 		));
 		$fields->removeByName("CostPrice");
 		$fields->removeByName("Variations");
@@ -87,7 +87,7 @@ class GiftVoucherFormValidator extends RequiredFields{
 					return false;
 				}
 				if($giftvalue <= 0){
-					$this->validationError("UnitPrice", "Gift value must be greater than 0");
+					$this->validationError("UnitPrice", _t('GiftVoucherProduct.ZeroAmountError', 'Gift value must be greater than 0'));
 					return false;
 				}
 			}
@@ -161,7 +161,7 @@ class GiftVoucher_OrderItem extends Product_OrderItem{
 	 * Send the voucher to the appropriate email
 	 */
 	public function sendVoucher(OrderCoupon $coupon) {
-		$from = Email::getAdminEmail();
+		$from = Email::config()->get('admin_email');
 		$to = $this->Order()->getLatestEmail();
 		$subject = _t("Order.GIFTVOUCHERSUBJECT", "Gift voucher");
 		$email = new Email($from, $to, $subject);

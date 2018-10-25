@@ -15,7 +15,10 @@ class SpecificPricingExtension extends DataExtension {
         }
         if($this->owner->isInDB() && ($fields->fieldByName("BasePrice") || $fields->fieldByName("Price"))){
             $fields->push(
-                GridField::create("SpecificPrices","Specific Prices", $this->owner->SpecificPrices(),
+                GridField::create(
+                    "SpecificPrices",
+                    _t('SpecificPricingExtension.GridTitle', "Specific Prices"),
+                    $this->owner->SpecificPrices(),
                     GridFieldConfig_RecordEditor::create()
                 )
             );

@@ -10,12 +10,12 @@ class DiscountReport extends ShopPeriodReport{
 
 	public function columns() {
 		return array(
-			"Name" => "Title",
-			"Code" => "Code",
-			"DiscountNice" => "Discount",
-			"Entered" => "Entered",
-			"UseCount" => "Uses",
-			"SavingsTotal" => "Total Savings"
+			"Name" => _t('DiscountReport.Name', 'Name'),
+			"Code" => _t('DiscountReport.Code', 'Code'),
+			"DiscountNice" => _t('DiscountReport.DiscountNice', 'DiscountNice'),
+			"Entered" => _t('DiscountReport.Entered', 'Entered'),
+			"UseCount" => _t('DiscountReport.UseCount', 'UseCount'),
+			"SavingsTotal" => _t('DiscountReport.SavingsTotal', 'SavingsTotal')
 		);
 	}
 

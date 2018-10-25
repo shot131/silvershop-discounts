@@ -9,7 +9,7 @@ class DiscountedOrderExtension extends DataExtension {
         $fields->addFieldsToTab('Root.Discounts',
            $grid = new GridField(
                 'Discounts',
-                'Discount',
+                _t('DiscountedOrderExtension.GridTitle', 'Discount'),
                 $this->Discounts(),
                 new GridFieldConfig_RecordViewer()
             )

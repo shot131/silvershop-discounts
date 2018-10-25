@@ -16,14 +16,14 @@ Order:
 Product_OrderItem:
   extensions:
     - DiscountedOrderItem
-Discount:
-  constraints:
-    - ZonesDiscountConstraint
-    - CategoriesDiscountConstraint
-    - ProductsDiscountConstraint
-    - GroupDiscountConstraint
-    - MembershipDiscountConstraint
-    - DatetimeDiscountConstraint
-    - ValueDiscountConstraint
-    - UseLimitDiscountConstraint
-    - CodeDiscountConstraint
+#Discount:
+#  constraints:
+#    - ZonesDiscountConstraint
+#    - CategoriesDiscountConstraint
+#    - ProductsDiscountConstraint
+#    - GroupDiscountConstraint
+#    - MembershipDiscountConstraint
+#    - DatetimeDiscountConstraint
+#    - ValueDiscountConstraint
+#    - UseLimitDiscountConstraint
+#    - CodeDiscountConstraint

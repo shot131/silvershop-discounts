@@ -12,7 +12,7 @@ class ProductTypeDiscountConstraint extends ItemDiscountConstraint{
 			$fields->addFieldToTab("Root.Main.Constraints.Products",
 				ListBoxField::create(
 					"ProductTypes",
-					"Product Types",
+					_t('ProductTypeDiscountConstraint.ProductTypes', 'Product Types'),
 					$this->getTypes(false, $this->owner)
 				)->setMultiple(true)
 			);
@@ -27,7 +27,7 @@ class ProductTypeDiscountConstraint extends ItemDiscountConstraint{
 		}
 		$incart = $this->itemsInCart($discount);
 		if(!$incart){
-			$this->error("The required product type(s), are not in the cart.");
+			$this->error(_t('ProductTypeDiscountConstraint.ErrorItemsInCart', 'The required product type(s), are not in the cart.'));
 		}
 		
 		return $incart;

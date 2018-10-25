@@ -1,0 +1,140 @@
+ru:
+  DiscountModelAdmin:
+    MENUTITLE: 'Скидки'
+    Main: 'Основные'
+  Discount:
+    PLURALNAME: 'Скидки'
+    SINGULARNAME: 'Скидка'
+    GROUPED: 'Только определённые пользователи могут воспользоваться этой скидкой.'
+    MEMBERSHIP: 'Только определённые пользователи могут воспользоваться этой скидкой.'
+    NOORDER: 'Заказ ещё не оформлен.'
+    INACTIVE: '{name} не активен.'
+    Title: 'Название'
+    Active: 'Активно'
+    ActiveDescription: 'Включить/отключить использование данной скидки'
+    Action: 'Действие'
+    DiscountByPercentage: 'Скидка в процентах'
+    Percentage: 'Проценты'
+    PercentageDescription: 'т.е. 0.05 = 5%, 0.5 = 50% и 5 = 500%'
+    Amount: 'Значение'
+    DiscountByFixedAmount: 'Фиксированная скидка'
+    MaxAmount: ' Максимальная скидка'
+    MaxAmountDescription: 'Максимально возможная скидка. 0 означает без ограничений.'
+    Type: 'Тип'
+    AppliesTo: 'Применить к'
+    EntireOrder: 'Всему заказу'
+    CartSubtotal: 'Стоимости корзины'
+    ShippingSubtotal: 'Стоимости доставки'
+    EachIndividualItem: 'Каждому пункту заказа'
+    ConstraintsTitle: 'Ограничения'
+    ConstraintsDescription: 'Настройте условия при которых скидка может быть применена к заказу:'
+    SaveNote: 'Будет показано больше условий после первого сохранения.'
+    UseCount: 'Эта скидка была использована {count} раз.'
+    Orders: 'Заказы'
+    HasBeenUsed: 'Была использована'
+    StartDate: 'Начало'
+    EndDate: 'Окончание'
+    From: 'C'
+    To: 'По'
+    Products: 'Товары'
+    Categories: 'Категории'
+    CodeDescription: 'Доступно частичное совпадение.'
+    DiscountNice: 'Скидка'
+  OrderDiscount:
+    PLURALNAME: 'Скидки'
+    SINGULARNAME: 'Скидка'
+    Description: 'Скидки применяются при оформлении заказа, исходя из определенных ограничений. Если нет ограничений, то скидка будет всегда применяться.'
+  OrderCoupon:
+    PLURALNAME: 'Купоны'
+    SINGULARNAME: 'Купон'
+    Description: 'Купоны - это специальные скидки, для применения которых требуется указать специальный код.'
+    GenerateMultipleAction: 'Сгенерировать несколько купонов'
+    GenerateCoupons: 'Сгенерировать купоны'
+    EXPIRED: 'Этот купон просрочен.'
+    TOOEARLY: 'Этот купон ещё рано использовать.'
+    INVALIDMINLENGTH: 'Длина кода должна быть как минимум {length} символов'
+    Code: 'Код'
+  DiscountConstraint:
+    USELIMITREACHED: 'Эту скидку использовали максимальное кол-во раз.'
+  OrderCouponModifier:
+    NOTINZONE: 'Этот купон может быть использован для определённых мест доставки.'
+  PartialUseDiscount:
+    PLURALNAME: 'Разовые скидки'
+    SINGULARNAME: 'Разовая скидка'
+    Description: "Частичная скидка позволяет сделать фиксированную скидку в зависимости от стоимости заказа."
+    ErrorField: 'Поле {field} не должно изменяться для частичной скидки.'
+  GenerateCouponsForm:
+    Number: 'Количество купонов'
+    CodePrefix: 'Префикс кода'
+    Length: 'Количество символов в коде'
+    LengthDescription: 'Дополнительно к длине префикса.'
+    GenerateAction: 'Генерировать'
+  CategoriesDiscountConstraint:
+    TabTitle: 'Категории'
+    GridTitle: 'Категории'
+    Description: 'Выберите категории товаров, на которые будет действовать скидка.'
+    ErrorItemsInCart: 'Требуемых товаров или категорий нет в корзине.'
+  CodeDiscountConstraint:
+    ErrorCodeDontMatch: 'Код купона не совпадает с {code}'
+  DatetimeDiscountConstraint:
+    Title: 'Проверить диапазон дат:'
+    Description: 'Вам нужно указать время 23:59:59, если вы хотите включить весь день.'
+    StartDateTime: 'Дата и время начала'
+    EndDateTime: 'Дата и время окончания'
+  GroupDiscountConstraint:
+    GroupID: 'Пользователи принадлежащие к группе'
+    EmptyGroupID: 'Любая или без группы'
+  MembershipDiscountConstraint:
+    TabTitle: 'Пользователи'
+  ProductsDiscountConstraint:
+    SpecificProducts: 'Товары'
+    SpecificProductsDescription: 'Выберите конкретные товары на которые будет действовать скидка'
+    ExactProducts: 'Все выбранные товары должны быть в корзине.'
+    MISSINGPRODUCT: 'Требуемых товаров нет в корзине.'
+    TabTitle: 'Товары'
+  ProductTypeDiscountConstraint:
+    ProductTypes: 'Типы товаров'
+    ErrorItemsInCart: 'Требуемых типов товаров нет в корзине.'
+  UseLimitDiscountConstraint:
+    UseLimit: 'Ограничить количество использований'
+    UseLimitDescription: 'Примечание: 0 = без ограничений'
+  ValueDiscountConstraint:
+    MinOrderValue: 'Минимальная стоимость заказа'
+    ErrorMinOrderValue: 'Сумма товаров в корзине должна быть минимум {value} чтобы воспользоваться скидкой.'
+  ZonesDiscountConstraint:
+    TabTitle: 'Зоны доставки'
+  DiscountedOrderExtension:
+    GridTitle: 'Скидки'
+  SpecificPricingExtension:
+    GridTitle: 'Specific Prices'
+  GiftVoucherProduct:
+    SINGULARNAME: 'Подарочный купон'
+    PLURALNAME: 'Подарочные купоны'
+    Price: 'Стоимость'
+    Fixed: 'Фиксированная'
+    AllowCustomerToChoose: 'Разрешить выбор'
+    MinimumAmount: 'Минимальное значение'
+    Amount: 'Значение'
+    MinimumAmountError: 'Скидка должна быть как минимум {MinimumAmount}'
+    ZeroAmountError: 'Скидка должна быть больше 0'
+  SpecificPrice:
+    Price: 'Стоимость'
+    StartDate: 'Начало'
+    EndDate: 'Окончание'
+    Code: 'Код'
+  OrderDiscountModifier:
+    SINGULARNAME: 'Cкидка'
+    PLURALNAME: 'Скидки'
+  CouponForm:
+    COUPON: 'Укажите код скидки, если он у вас есть.'
+    NOTFOUND: 'Код скидки не действителен'
+  DiscountReport:
+    Name: 'Название'
+    Code: 'Код'
+    DiscountNice: 'Скидка'
+    Entered: 'Введено'
+    UseCount: 'Использований'
+    SavingsTotal: 'Общая скидка'
+    Description: 'Отчёт по общему кол-ву скидок.'
+
+

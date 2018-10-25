@@ -8,12 +8,13 @@ class DatetimeDiscountConstraint extends DiscountConstraint{
 	);
 	
 	public function updateCMSFields(FieldList $fields) {
+        $fields->findOrMakeTab('Root.Main.Constraints.Main', _t('DiscountModelAdmin.Main', 'Main'));
 		$fields->addFieldToTab("Root.Main.Constraints.Main",
-			FieldGroup::create("Valid date range:",
-				CouponDatetimeField::create("StartDate", "Start Date / Time"),
-				CouponDatetimeField::create("EndDate", "End Date / Time")
+			FieldGroup::create(_t('DatetimeDiscountConstraint.Title', 'Valid date range:'),
+				CouponDatetimeField::create("StartDate", _t('DatetimeDiscountConstraint.StartDateTime', 'Start Date / Time')),
+				CouponDatetimeField::create("EndDate", _t('DatetimeDiscountConstraint.EndDateTime', 'End Date / Time'))
 			)->setDescription(
-				"You should set the end time to 23:59:59, if you want to include the entire end day."
+				_t('DatetimeDiscountConstraint.Description', 'You should set the end time to 23:59:59, if you want to include the entire end day.')
 			)
 		);
 	}

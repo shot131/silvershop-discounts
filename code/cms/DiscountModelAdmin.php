@@ -38,7 +38,7 @@ class DiscountModelAdmin extends ModelAdmin {
         if($grid = $form->Fields()->fieldByName("OrderCoupon")) {
             $grid->getConfig()
                 ->addComponent(
-                    $link = new GridField_LinkComponent("Generate Multiple Coupons", $this->Link()."/generatecoupons"),
+                    $link = new GridField_LinkComponent(_t('OrderCoupon.GenerateMultipleAction', 'Generate Multiple Coupons'), $this->Link()."/generatecoupons"),
                     "GridFieldExportButton"
                 );
             $link->addExtraClass("ss-ui-action-constructive");
@@ -48,7 +48,7 @@ class DiscountModelAdmin extends ModelAdmin {
 
         if(isset($descriptions[$this->modelClass])) {
             $form->Fields()->fieldByName($this->modelClass)
-                ->setDescription($descriptions[$this->modelClass]);
+                ->setDescription(_t($this->modelClass . '.Description', $descriptions[$this->modelClass]));
         }
 
         return $form;
@@ -96,19 +96,19 @@ class DiscountModelAdmin extends ModelAdmin {
         $fields->removeByName('SaveNote');
 
         $fields->addFieldsToTab("Root.Main", array(
-            NumericField::create('Number', 'Number of Coupons'),
+            NumericField::create('Number', _t('GenerateCouponsForm.Number', 'Number of Coupons')),
             FieldGroup::create("Code",
-                TextField::create("Prefix", "Code Prefix")
+                TextField::create("Prefix", _t('GenerateCouponsForm.CodePrefix', 'Code Prefix'))
                     ->setMaxLength(5),
-                DropdownField::create("Length","Code Characters Length",
+                DropdownField::create("Length", _t('GenerateCouponsForm.Length', 'Code Characters Length'),
                     array_combine(range(5,20),range(5,20)),
                     OrderCoupon::config()->generated_code_length
-                )->setDescription("This is in addition to the length of the prefix.")
+                )->setDescription(_t('GenerateCouponsForm.LengthDescription', 'This is in addition to the length of the prefix.'))
             )
         ), "Title");
 
         $actions = new FieldList(
-            new FormAction('generate', 'Generate')
+            new FormAction('generate', _t('GenerateCouponsForm.GenerateAction', 'Generate'))
         );
         $validator = new RequiredFields(array(
             'Title',
@@ -154,7 +154,7 @@ class DiscountModelAdmin extends ModelAdmin {
 
     function generatecoupons() {
         return array(
-            'Title' => 'Generate Coupons',
+            'Title' => _t('OrderCoupon.GenerateCoupons', 'Generate Coupons'),
             'EditForm' => $this->GenerateCouponsForm(),
             'SearchForm' => '',
             'ImportForm' => ''

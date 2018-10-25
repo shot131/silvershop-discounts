@@ -63,4 +63,16 @@ class SpecificPrice extends DataObject{
 		return $fields;
 	}
 
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels($includerelations);
+
+        $labels['Price'] = _t('SpecificPrice.Price', 'Price');
+        $labels['StartDate'] = _t('SpecificPrice.StartDate', 'StartDate');
+        $labels['EndDate'] = _t('SpecificPrice.EndDate', 'EndDate');
+        $labels['Group.Code'] = _t('SpecificPrice.Code', 'Code');
+
+        return $labels;
+    }
+
 }

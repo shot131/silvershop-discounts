@@ -8,14 +8,20 @@ class CategoriesDiscountConstraint extends ItemDiscountConstraint{
 
 	public function updateCMSFields(FieldList $fields) {
 		if($this->owner->isInDB()){
-			$fields->fieldByName("Root.Main.Constraints")->push(new Tab("Categories",
-				GridField::create("Categories", "Categories", $this->owner->Categories(),
+			$fields->fieldByName("Root.Main.Constraints")->push(new Tab(
+			    'Categories',
+                _t('CategoriesDiscountConstraint.TabTitle', 'Categories'),
+				GridField::create(
+				    "Categories",
+                    _t('CategoriesDiscountConstraint.GridTitle', 'Categories'),
+                    $this->owner->Categories(),
 					GridFieldConfig_RelationEditor::create()
 						->removeComponentsByType("GridFieldAddNewButton")
 						->removeComponentsByType("GridFieldEditButton")
-				)->setDescription(
-					"Select specific product categories that this discount applies to"
-				)
+				)->setDescription(_t(
+				    'CategoriesDiscountConstraint.Description',
+                    'Select specific product categories that this discount applies to'
+                ))
 			));
 		}
 	}
@@ -28,7 +34,9 @@ class CategoriesDiscountConstraint extends ItemDiscountConstraint{
 		}
 		$incart = $this->itemsInCart($discount);
 		if(!$incart){
-			$this->error("The required products (categories) are not in the cart.");
+			$this->error(_t('CategoriesDiscountConstraint.ErrorItemsInCart',
+                'The required products (categories) are not in the cart.'
+            ));
 		}
 		
 		return $incart;

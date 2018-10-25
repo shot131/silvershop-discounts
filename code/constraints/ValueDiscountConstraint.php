@@ -11,8 +11,9 @@ class ValueDiscountConstraint extends DiscountConstraint{
 	);
 
 	public function updateCMSFields(FieldList $fields) {
+        $fields->findOrMakeTab('Root.Main.Constraints.Main', _t('DiscountModelAdmin.Main', 'Main'));
 		$fields->addFieldToTab("Root.Main.Constraints.Main",
-			CurrencyField::create("MinOrderValue", "Minimum Order Value")
+			CurrencyField::create("MinOrderValue", _t('ValueDiscountConstraint.MinOrderValue', 'Minimum Order Value'))
 		);
 	}
 	
@@ -26,12 +27,10 @@ class ValueDiscountConstraint extends DiscountConstraint{
 	public function check(Discount $discount) {
 		if($discount->MinOrderValue > 0 && $this->order->SubTotal() < $discount->MinOrderValue){
 			$this->error(
-				sprintf(
-					_t("Discount.MINORDERVALUE",
-						"Your cart subtotal must be at least %s to use this discount"),
-					$discount->dbObject("MinOrderValue")->Nice()
-				)
-			);
+                _t('ValueDiscountConstraint.ErrorMinOrderValue',
+                    'Your cart subtotal must be at least {value} to use this discount',
+                    array('value' => $discount->dbObject("MinOrderValue")->Nice())
+            ));
 			return false;
 		}
 

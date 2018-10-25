@@ -97,60 +97,62 @@ class Discount extends DataObject {
         $fields = new FieldList(array(
             $tabset = new TabSet("Root",
                 $maintab = new Tab("Main",
-                    TextField::create("Title"),
-                    CheckboxField::create("Active", "Active")
-                        ->setDescription("Enable/disable all use of this discount."),
-                    HeaderField::create("ActionTitle", "Action", 3),
+                    TextField::create("Title", _t('Discount.Title', 'Title')),
+                    CheckboxField::create("Active", _t('Discount.Active', 'Active'))
+                        ->setDescription(_t('Discount.ActiveDescription', 'Enable/disable all use of this discount.')),
+                    HeaderField::create("ActionTitle", _t('Discount.Action', 'Action'), 3),
                     $typefield = SelectionGroup::create("Type",array(
                         new SelectionGroup_Item("Percent",
                             $percentgroup = FieldGroup::create(
-                                $percentfield = NumericField::create("Percent", "Percentage", "0.00")
-                                    ->setDescription("e.g. 0.05 = 5%, 0.5 = 50%, and 5 = 500%"),
-                                $maxamountfield = CurrencyField::create("MaxAmount",
-                                    _t("MaxAmount", "Maximum Amount")
+                                $percentfield = CurrencyField::create("Percent", _t('Discount.Percentage', 'Percentage'), "0.00")
+                                    ->setDescription(_t('Discount.PercentageDescription', 'e.g. 0.05 = 5%, 0.5 = 50%, and 5 = 500%')),
+                                $maxamountfield = DecimalField::create("MaxAmount",
+                                    _t('Discount.MaxAmount', 'Maximum Amount')
                                 )->setDescription(
-                                    "The total allowable discount. 0 means unlimited."
+                                    _t('Discount.MaxAmountDescription', 'The total allowable discount. 0 means unlimited.')
                                 )
                             ),
-                            "Discount by percentage"
+                            _t('Discount.DiscountByPercentage', 'Discount by percentage')
                         ),
                         new SelectionGroup_Item("Amount",
-                            $amountfield = CurrencyField::create("Amount", "Amount", "$0.00"),
-                            "Discount by fixed amount"
+                            $amountfield = CurrencyField::create("Amount", _t('Discount.Amount', 'Amount'), 0.00),
+                            _t('Discount.DiscountByFixedAmount', 'Discount by fixed amount')
                         )
-                    ))->setTitle("Type"),
-                    OptionSetField::create("For", "Applies to", array(
-                        "Order" => "Entire Order",
-                        "Cart" => "Cart Subtotal",
-                        "Shipping" => "Shipping Subtotal",
-                        "Items" => "Each Individual Item"
+                    ))->setTitle(_t('Discount.Type', 'Type')),
+                    OptionSetField::create("For", _t('Discount.AppliesTo', 'Applies to'), array(
+                        "Order" => _t('Discount.EntireOrder', 'Entire Order'),
+                        "Cart" => _t('Discount.CartSubtotal', 'Cart Subtotal'),
+                        "Shipping" =>  _t('Discount.ShippingSubtotal', 'Shipping Subtotal'),
+                        "Items" => _t('Discount.EachIndividualItem', 'Each Individual Item')
                     )),
-                    new Tab("Main",
-                        HeaderField::create("ConstraintsTitle", "Constraints", 3),
+                    $tabMain = new Tab("Main",
+                        HeaderField::create("ConstraintsTitle", _t('Discount.ConstraintsTitle', 'Constraints'), 3),
                         LabelField::create(
                             "ConstraintsDescription",
-                            "Configure the requirements an order must meet for this discount to be valid:"
+                            _t('Discount.ConstraintsDescription', 'Configure the requirements an order must meet for this discount to be valid:')
                         )
                     ),
-                    new TabSet("Constraints")
+                    $constraintsTab = new TabSet("Constraints")
                 )
             )
         ));
+        $maintab->setTitle(_t('Discount.Main', 'Main'));
+        $tabMain->setTitle(_t('Discount.Main', 'Main'));
+        $constraintsTab->setTitle(_t('Discount.ConstraintsTitle', 'Constraints'));
 
         if(!$this->isInDB()) {
             $fields->addFieldToTab("Root.Main",
                 LiteralField::create("SaveNote",
-                    "<p class=\"message good\">More constraints will show up after you save for the first time.</p>"
+                    '<p class="message good">' . _t('Discount.SaveNote', 'More constraints will show up after you save for the first time.') . '</p>'
                 ), "Constraints"
             );
         }
-
         if($count = $this->getUseCount()) {
             $fields->addFieldsToTab("Root.Usage", array(
-                HeaderField::create("UseCount", sprintf("This discount has been used $count time%s.", $count > 1 ? "s" : "")),
+                HeaderField::create("UseCount", _t('Discount.UseCount', 'This discount has been used {count} time`s.', ['count' => $count])),
                 GridField::create(
                     "Orders",
-                    "Orders",
+                    _t('Discount.Orders', 'Orders'),
                     $this->getAppliedOrders(),
                     GridFieldConfig_RecordViewer::create()
                         ->removeComponentsByType("GridFieldViewButton")
@@ -181,39 +183,51 @@ class Discount extends DataObject {
         return $fields;
     }
 
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels($includerelations);
+
+        $labels['Title'] = _t('Discount.Title', 'Title');
+        $labels['DiscountNice'] = _t('Discount.DiscountNice', 'DiscountNice');
+        $labels['StartDate'] = _t('Discount.StartDate', 'StartDate');
+        $labels['EndDate'] = _t('Discount.EndDate', 'EndDate');
+
+        return $labels;
+    }
+
     public function getDefaultSearchContext() {
         $context = parent::getDefaultSearchContext();
         $fields = $context->getFields();
-        $fields->push(CheckboxField::create("HasBeenUsed"));
+        $fields->push(CheckboxField::create("HasBeenUsed", _t('Discount.HasBeenUsed', 'Has been used')));
         //add date range filtering
-        $fields->push(ToggleCompositeField::create("StartDate", "Start Date",array(
-            DateField::create("q[StartDateFrom]", "From")
+        $fields->push(ToggleCompositeField::create("StartDate", _t('Discount.StartDate', "Start Date"), array(
+            DateField::create("q[StartDateFrom]", _t('Discount.From', 'From'))
                         ->setConfig('showcalendar', true),
-            DateField::create("q[StartDateTo]", "To")
+            DateField::create("q[StartDateTo]", _t('Discount.To', 'To'))
                         ->setConfig('showcalendar', true)
         )));
-        $fields->push(ToggleCompositeField::create("EndDate", "End Date",array(
-            DateField::create("q[EndDateFrom]", "From")
+        $fields->push(ToggleCompositeField::create("EndDate", _t('Discount.EndDate', "End Date"),array(
+            DateField::create("q[EndDateFrom]", _t('Discount.From', 'From'))
                         ->setConfig('showcalendar', true),
-            DateField::create("q[EndDateTo]", "To")
+            DateField::create("q[EndDateTo]", _t('Discount.To', 'To'))
                         ->setConfig('showcalendar', true)
         )));
         //must be enabled in config, because some sites may have many products = slow load time, or memory maxes out
         //future solution is using an ajaxified field
         if(self::config()->filter_by_product){
             $fields->push(
-                ListboxField::create("Products", "Products", Product::get()->map()->toArray())
+                ListboxField::create("Products", _t('Discount.Products', 'Products'), Product::get()->map()->toArray())
                     ->setMultiple(true)
             );
         }
         if(self::config()->filter_by_category){
             $fields->push(
-                ListboxField::create("Categories", "Categories", ProductCategory::get()->map()->toArray())
+                ListboxField::create("Categories", _t('Discount.Categories', 'Categories'), ProductCategory::get()->map()->toArray())
                     ->setMultiple(true)
             );
         }
         if($field = $fields->fieldByName("Code")){
-            $field->setDescription("This can be a partial match.");
+            $field->setDescription(_t('Discount.CodeDescription', 'This can be a partial match.'));
         }
         //get the array, to maniplulate name, and fullname seperately
         $filters = $context->getFilters();
@@ -243,7 +257,7 @@ class Discount extends DataObject {
         // active discount.
         if(!$this->Active) {
             $this->error(
-                sprintf(_t("Discount.INACTIVE", "This %s is not active."), $this->i18n_singular_name())
+               _t("Discount.INACTIVE", "This {name} is not active.", ['name' => $this->i18n_singular_name()])
             );
 
             return false;

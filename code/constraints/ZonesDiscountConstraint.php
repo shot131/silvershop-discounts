@@ -8,8 +8,13 @@ class ZonesDiscountConstraint extends DiscountConstraint{
 
 	public function updateCMSFields(FieldList $fields) {
 		if($this->owner->isInDB()){
-			$fields->fieldByname("Root.Main.Constraints")->push(new Tab("Zones",
-				$zones = new GridField("Zones", "Zones", $this->owner->Zones(),
+			$fields->fieldByname("Root.Main.Constraints")->push(new Tab(
+			    "Zones",
+                _t('ZonesDiscountConstraint.TabTitle', 'Zones'),
+				$zones = new GridField(
+				    "Zones",
+                    _t('ZonesDiscountConstraint.TabTitle', 'Zones'),
+                    $this->owner->Zones(),
 					GridFieldConfig_RelationEditor::create()
 						->removeComponentsByType("GridFieldAddNewButton")
 						->removeComponentsByType("GridFieldEditButton")

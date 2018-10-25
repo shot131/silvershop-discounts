@@ -58,7 +58,7 @@ class OrderCoupon extends Discount {
 		$fields = parent::getCMSFields();
 		$fields->addFieldsToTab(
 			"Root.Main", array(
-				$codefield = TextField::create("Code")->setMaxLength(25),
+				$codefield = TextField::create("Code", _t('OrderCoupon.Code', 'Code'))->setMaxLength(25),
 			), 
 			"Active"
 		);
@@ -70,6 +70,15 @@ class OrderCoupon extends Discount {
 
 		return $fields;
 	}
+
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels($includerelations);
+
+        $labels['Code'] = _t('OrderCoupon.Code', 'Code');
+
+        return $labels;
+    }
 
 	public function validate() {
 		$result = parent::validate();

@@ -7,12 +7,13 @@ class GroupDiscountConstraint extends DiscountConstraint{
 	);
 
 	public function updateCMSFields(FieldList $fields) {
+        $fields->findOrMakeTab('Root.Main.Constraints.Main', _t('DiscountModelAdmin.Main', 'Main'));
 		$fields->addFieldToTab("Root.Main.Constraints.Main",
 			DropdownField::create("GroupID",
-				"Member Belongs to Group",
+				_t('GroupDiscountConstraint.GroupID', 'Member Belongs to Group'),
 				Group::get()->map('ID', 'Title')
 			)->setHasEmptyDefault(true)
-			->setEmptyString('Any or no group')
+			->setEmptyString(_t('GroupDiscountConstraint.EmptyGroupID', 'Any or no group'))
 		);
 	}
 	
