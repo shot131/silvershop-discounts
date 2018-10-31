@@ -30,6 +30,16 @@ class OrderDiscountModifier extends OrderModifier {
     }
 
     public function getDiscount() {
+        $calculator = $this->getCalculator();
+        $amount = $calculator->calculate();
+
+        $this->setField('Amount', $amount);
+
+        return $amount;
+    }
+
+    public function getCalculator()
+    {
         $context = array();
 
         if($code = $this->getCode()) {
@@ -39,12 +49,7 @@ class OrderDiscountModifier extends OrderModifier {
         $order = $this->Order();
         $order->extend("updateDiscountContext", $context);
 
-        $calculator = new Shop\Discount\Calculator($order, $context);
-        $amount = $calculator->calculate();
-
-        $this->setField('Amount', $amount);
-
-        return $amount;
+        return new Shop\Discount\Calculator($order, $context);
     }
 
     public function getCode() {
