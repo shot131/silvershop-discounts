@@ -7,6 +7,7 @@ class Discount extends DataObject {
 
     private static $db = array(
         "Title" => "Varchar(255)", //store the promotion name, or whatever you like
+        "Description" => "Varchar(255)",
         "Type" => "Enum('Percent,Amount','Percent')",
         "Amount" => "Currency",
         "Percent" => "Percentage",
@@ -98,6 +99,7 @@ class Discount extends DataObject {
             $tabset = new TabSet("Root",
                 $maintab = new Tab("Main",
                     TextField::create("Title", _t('Discount.Title', 'Title')),
+                    TextareaField::create("Description", _t('Discount.Description', 'Description')),
                     CheckboxField::create("Active", _t('Discount.Active', 'Active'))
                         ->setDescription(_t('Discount.ActiveDescription', 'Enable/disable all use of this discount.')),
                     HeaderField::create("ActionTitle", _t('Discount.Action', 'Action'), 3),

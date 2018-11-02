@@ -57,10 +57,10 @@ class OrderDiscountModifier extends OrderModifier {
         $code = $order->IsCart() ? Session::get("cart.couponcode") : null;
 
         if(!$code) {
+            $code = [];
             foreach ($this->Order()->Discounts() as $discount) {
                 if (!empty($discount->Code)) {
-                    $code = $discount->Code;
-                    break;
+                    $code[] = $discount->Code;
                 }
             }
         }

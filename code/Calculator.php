@@ -203,7 +203,7 @@ class Calculator {
 		$this->log[] = array(
 			"Level" => $level,
 			"Amount" => $amount,
-			"Discount" => $discount->Title
+			"Discount" => $discount
 		);
 	}
 
