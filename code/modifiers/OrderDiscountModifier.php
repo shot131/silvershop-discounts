@@ -53,13 +53,15 @@ class OrderDiscountModifier extends OrderModifier {
     }
 
     public function getCode() {
-        $code = Session::get("cart.couponcode");
+        $order = $this->Order();
+        $code = $order->IsCart() ? Session::get("cart.couponcode") : null;
 
-        if(!$code && $this->Order()->exists()) {
-            $discount = $this->Order()->Discounts()->filter("Code:not", "")->first();
-
-            if($discount) {
-                return $discount->Code;
+        if(!$code) {
+            foreach ($this->Order()->Discounts() as $discount) {
+                if (!empty($discount->Code)) {
+                    $code = $discount->Code;
+                    break;
+                }
             }
         }
 

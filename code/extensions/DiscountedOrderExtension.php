@@ -6,6 +6,7 @@
 class DiscountedOrderExtension extends DataExtension {
 
     public function updateCMSFields(FieldList $fields) {
+        $fields->findOrMakeTab('Root.Discounts', _t('Discount.PLURALNAME', 'PLURALNAME'));
         $fields->addFieldsToTab('Root.Discounts',
            $grid = new GridField(
                 'Discounts',
