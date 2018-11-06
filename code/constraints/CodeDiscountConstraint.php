@@ -32,6 +32,8 @@ class CodeDiscountConstraint extends DiscountConstraint{
 		    foreach ($code as $k => $codeVal) {
                 $code[$k] = strtolower($codeVal);
             }
+        } else {
+            $code = [strtolower($code)];
         }
 		if($discount->Code && (!in_array(strtolower($discount->Code), $code))){
 			$this->error(_t('CodeDiscountConstraint.ErrorCodeDontMatch',
