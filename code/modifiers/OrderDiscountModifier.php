@@ -23,18 +23,17 @@ class OrderDiscountModifier extends OrderModifier {
 
     private static $plural_name = "Discounts";
 
-    public function value($incoming) {
-        $this->Amount = $this->getDiscount();
-
+    public function value($incoming)
+    {
+        $this->getDiscount();
         return $this->Amount;
     }
 
-    public function getDiscount() {
+    public function getDiscount()
+    {
         $calculator = $this->getCalculator();
         $amount = $calculator->calculate();
-
-        $this->setField('Amount', $amount);
-
+        $this->Amount = $amount;
         return $amount;
     }
 
