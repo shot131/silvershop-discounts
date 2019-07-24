@@ -79,7 +79,7 @@ class OrderDiscountModifier extends OrderModifier {
         );
     }
 
-    public function getAmount() {
+    public function Amount() {
         return $this->getDiscount();
     }
 
